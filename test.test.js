@@ -47,8 +47,8 @@ test("La funzione average calcola la media aritmetica di un array di numeri.", (
 
 function createSlug2(str) {
     return str.toLowerCase().trim().replace(/\s+/g, "-");
-  }
-  
+}
+
 
 
 test("La funzione 'createSlug' sostituisce gli spazi con -", () => {
@@ -71,7 +71,7 @@ function isPalindrome(str) {
 }
 
 
-test( "La funzione isPalindrome verifica se una stringa è un palindromo.", () => {
+test("La funzione isPalindrome verifica se una stringa è un palindromo.", () => {
     expect(isPalindrome("ala")).toBe(true)
     expect(isPalindrome("seba")).toBe(false)
 })
@@ -84,33 +84,54 @@ test( "La funzione isPalindrome verifica se una stringa è un palindromo.", () =
 
 function createSlug3(titolo) {
     if (titolo.trim().length > 10) {
-      return true;
+        return true;
     } else {
-      throw new Error("errore: il titolo è più corto di 10 caratteri");
+        throw new Error("errore: il titolo è più corto di 10 caratteri");
     }
-  }
-  
-  test("La funzione createSlug3 lancia un errore se il titolo è vuoto o non valido.", () => {
+}
+
+test("La funzione createSlug3 lancia un errore se il titolo è vuoto o non valido.", () => {
     expect(() => createSlug3("titolo")).toThrow();
-  });
+});
 
 
 
-  
-  // Crea un array di oggetti posts, in cui ogni oggetto ha le proprietà id, title e slug
-  const posts = [
+
+// Crea un array di oggetti posts, in cui ogni oggetto ha le proprietà id, title e slug
+const posts = [
     { id: 1, title: "React Basics", slug: "react-basics" },
     { id: 2, title: "Advanced JS", slug: "advanced-js" },
     { id: 3, title: "Testing with Jest", slug: "testing-jest" }
-  ];
+];
 
-  
-  function findPostById(postsArray, id) {
+
+function findPostById(postsArray, id) {
     if (typeof id !== 'number') throw new Error("ID deve essere un numero");
     return postsArray.find(post => post.id === id);
 }
 
-  test("👉 La funzione findPostById restituisce il post corretto dato l’array di post e l’id", () => {
-    const post = findPostById(posts, 2);
-    expect(post).toEqual({ id: 2, title: "Advanced JS", slug: "advanced-js" });
-  });
+describe("Test su findPostById e struttura dati", () => {
+
+    test("👉 La funzione findPostById restituisce il post corretto dato l’array di post e l’id", () => {
+        const post = findPostById(posts, 2);
+        expect(post).toEqual({ id: 2, title: "Advanced JS", slug: "advanced-js" });
+    });
+
+    test("❌ La funzione lancia un errore se l'id non è un numero", () => {
+        expect(() => findPostById(posts, "2")).toThrow("ID deve essere un numero");
+    });
+
+    test("✅ Ogni post ha le proprietà id, title e slug", () => {
+        posts.forEach(post => {
+            expect(post).toHaveProperty("id");
+            expect(post).toHaveProperty("title");
+            expect(post).toHaveProperty("slug");
+        });
+    });
+
+    test("📌 La proprietà 'id' di ogni post è un numero", () => {
+        posts.forEach(post => {
+            expect(typeof post.id).toBe("number");
+        });
+    })
+})
