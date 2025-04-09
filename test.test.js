@@ -11,3 +11,20 @@ function  getInitials (nome,cognome) {
 test("la funzione 'getInitials' restituisce le di un nome completo?", () => {
     expect(getInitials("Sebastiano" ,"Salzillo")).toBe("SS")
 })
+
+
+//Creare un test che verifichi la seguente descrizione:
+
+//👉 "La funzione createSlug restituisce una stringa in lowercase."
+
+
+function createSlug (str) {
+    return str.toLowerCase()
+}
+
+test("la funzione 'createSlug' ritorna un astringa to lowercase",() => {
+    expect(createSlug("Seba")).toBe("seba")
+    expect(createSlug("SEBA")).toBe("seba")
+})
+
+
